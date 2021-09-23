@@ -13,35 +13,36 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.teal,
         body: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 100.0,
-                color: Colors.red,
-              ),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 100.0,
-                      height: 100.0,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      width: 100.0,
-                      height: 100.0,
-                      color: Colors.green,
-                    ),
-                  ],
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage: NetworkImage(
+                    'https://avatars.githubusercontent.com/u/47724710?v=4',
+                  ),
                 ),
-              ),
-              Container(
-                width: 100.0,
-                color: Colors.blue,
-              ),
-            ],
+                Text(
+                  'Lucas Fell',
+                  style: TextStyle(
+                    fontFamily: 'Pacifico',
+                    fontSize: 36.0,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  'Zallpy Trainee'.toUpperCase(),
+                  style: TextStyle(
+                    fontFamily: 'SourceSansPro',
+                    fontSize: 20.0,
+                    color: Colors.teal[100],
+                    letterSpacing: 2.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

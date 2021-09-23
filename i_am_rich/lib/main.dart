@@ -5,16 +5,15 @@ void main() {
     home: Scaffold(
       appBar: AppBar(
         title: const Text('I am Rich'),
+        centerTitle: true,
         backgroundColor: Colors.blueGrey[900],
       ),
       body: const Center(
         child: Image(
-          image: NetworkImage(
-            'https://www.imagesource.com/wp-content/uploads/2019/06/Rio.jpg',
-          ),
+          image: AssetImage('images/diamond.png'),
         ),
       ),
-      backgroundColor: Colors.blueGrey[300],
+      backgroundColor: Colors.blueGrey,
     ),
   ));
 }

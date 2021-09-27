@@ -41,52 +41,51 @@ class MyApp extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 10.0,
-                  ),
-                  padding: EdgeInsets.all(10.0),
-                  color: Colors.white,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.phone,
-                        color: Colors.teal,
-                      ),
-                      SizedBox(width: 10.0),
-                      Text(
-                        '+55 51 9 8011 1438',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.teal[900],
-                        ),
-                      )
-                    ],
+                SizedBox(
+                  height: 20.0,
+                  width: 150.0,
+                  child: Divider(
+                    color: Colors.teal[100],
                   ),
                 ),
-                Container(
+                Card(
                   margin: EdgeInsets.symmetric(
                     horizontal: 20.0,
                     vertical: 10.0,
                   ),
-                  padding: EdgeInsets.all(10.0),
                   color: Colors.white,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.mail,
-                        color: Colors.teal,
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.phone,
+                      color: Colors.teal,
+                    ),
+                    title: Text(
+                      '+55 51 9 8011 1438',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.teal[900],
                       ),
-                      SizedBox(width: 10.0),
-                      Text(
-                        'lucas.fell@zallpy.com',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.teal[900],
-                        ),
-                      )
-                    ],
+                    ),
+                  ),
+                ),
+                Card(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 10.0,
+                  ),
+                  color: Colors.white,
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.mail,
+                      color: Colors.teal,
+                    ),
+                    title: Text(
+                      'lucas.fell@zallpy.com',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.teal[900],
+                      ),
+                    ),
                   ),
                 ),
               ],

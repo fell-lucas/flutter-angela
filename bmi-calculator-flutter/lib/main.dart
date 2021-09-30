@@ -13,7 +13,7 @@ class BMICalculator extends StatelessWidget {
         primaryColor: primaryColor,
         scaffoldBackgroundColor: primaryColor,
         appBarTheme: AppBarTheme(
-          backgroundColor: reusableCardBg,
+          backgroundColor: activeBg,
         ),
       ),
       home: InputPage(),

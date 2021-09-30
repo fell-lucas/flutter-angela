@@ -9,6 +9,28 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColor = inactiveBg;
+  Color femaleCardColor = inactiveBg;
+
+  void updateGender(int i) {
+    if (i == 1) {
+      if (maleCardColor == inactiveBg) {
+        maleCardColor = activeBg;
+        femaleCardColor = inactiveBg;
+      } else {
+        maleCardColor = inactiveBg;
+      }
+    }
+    if (i == 2) {
+      if (femaleCardColor == inactiveBg) {
+        femaleCardColor = activeBg;
+        maleCardColor = inactiveBg;
+      } else {
+        femaleCardColor = inactiveBg;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,17 +48,33 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: Row(
                 children: [
-                  ReusableCard(
-                    child: IconContent(
-                      icon: Icons.male,
-                      text: 'MALE',
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => setState(() {
+                        updateGender(1);
+                      }),
+                      child: ReusableCard(
+                        color: maleCardColor,
+                        child: IconContent(
+                          icon: Icons.male,
+                          text: 'MALE',
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(width: 15),
-                  ReusableCard(
-                    child: IconContent(
-                      icon: Icons.female,
-                      text: 'FEMALE',
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => setState(() {
+                        updateGender(2);
+                      }),
+                      child: ReusableCard(
+                        color: femaleCardColor,
+                        child: IconContent(
+                          icon: Icons.female,
+                          text: 'FEMALE',
+                        ),
+                      ),
                     ),
                   ),
                 ],

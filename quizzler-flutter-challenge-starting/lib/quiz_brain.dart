@@ -4,31 +4,64 @@ class QuizBrain {
   int _questionNumber = 0;
 
   List<Question> _questionBank = [
-    Question('Some cats are actually allergic to humans', true),
-    Question('You can lead a cow down stairs but not up stairs.', false),
-    Question('Approximately one quarter of human bones are in the feet.', true),
-    Question('A slug\'s blood is green.', true),
-    Question('Buzz Aldrin\'s mother\'s maiden name was \"Moon\".', true),
-    Question('It is illegal to pee in the Ocean in Portugal.', true),
     Question(
-        'No piece of square dry paper can be folded in half more than 7 times.',
-        false),
+      text: 'Some cats are actually allergic to humans',
+      answer: true,
+    ),
     Question(
-        'In London, UK, if you happen to die in the House of Parliament, you are technically entitled to a state funeral, because the building is considered too sacred a place.',
-        true),
+      text: 'You can lead a cow down stairs but not up stairs.',
+      answer: false,
+    ),
     Question(
-        'The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.',
-        false),
+      text: 'Approximately one quarter of human bones are in the feet.',
+      answer: true,
+    ),
     Question(
-        'The total surface area of two human lungs is approximately 70 square metres.',
-        true),
-    Question('Google was originally called \"Backrub\".', true),
+      text: 'A slug\'s blood is green.',
+      answer: true,
+    ),
     Question(
-        'Chocolate affects a dog\'s heart and nervous system; a few ounces are enough to kill a small dog.',
-        true),
+      text: 'Buzz Aldrin\'s mother\'s maiden name was \"Moon\".',
+      answer: true,
+    ),
     Question(
-        'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
-        true),
+      text: 'It is illegal to pee in the Ocean in Portugal.',
+      answer: true,
+    ),
+    Question(
+      text:
+          'No piece of square dry paper can be folded in half more than 7 times.',
+      answer: false,
+    ),
+    Question(
+      text:
+          'In London, UK, if you happen to die in the House of Parliament, you are technically entitled to a state funeral, because the building is considered too sacred a place.',
+      answer: true,
+    ),
+    Question(
+      text:
+          'The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.',
+      answer: false,
+    ),
+    Question(
+      text:
+          'The total surface area of two human lungs is approximately 70 square metres.',
+      answer: true,
+    ),
+    Question(
+      text: 'Google was originally called \"Backrub\".',
+      answer: true,
+    ),
+    Question(
+      text:
+          'Chocolate affects a dog\'s heart and nervous system; a few ounces are enough to kill a small dog.',
+      answer: true,
+    ),
+    Question(
+      text:
+          'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
+      answer: true,
+    ),
   ];
 
   void nextQuestion() {
@@ -38,11 +71,11 @@ class QuizBrain {
   }
 
   String getQuestionText() {
-    return _questionBank[_questionNumber].questionText;
+    return _questionBank[_questionNumber].text;
   }
 
   bool getCorrectAnswer() {
-    return _questionBank[_questionNumber].questionAnswer;
+    return _questionBank[_questionNumber].answer;
   }
 
   bool isFinished() {

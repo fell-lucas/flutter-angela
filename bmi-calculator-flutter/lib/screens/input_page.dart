@@ -1,3 +1,6 @@
+import 'package:bmi_calculator/theme_globals.dart';
+import 'package:bmi_calculator/widgets/icon_content.dart';
+import 'package:bmi_calculator/widgets/reusable_card.dart';
 import 'package:flutter/material.dart';
 
 class InputPage extends StatefulWidget {
@@ -12,6 +15,10 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
       ),
+      bottomNavigationBar: Container(
+        height: bottomNavHeight,
+        color: bottomNavColor,
+      ),
       body: Padding(
         padding: EdgeInsets.all(15),
         child: Column(
@@ -19,9 +26,19 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: Row(
                 children: [
-                  ReusableCard(),
+                  ReusableCard(
+                    child: IconContent(
+                      icon: Icons.male,
+                      text: 'MALE',
+                    ),
+                  ),
                   SizedBox(width: 15),
-                  ReusableCard(),
+                  ReusableCard(
+                    child: IconContent(
+                      icon: Icons.female,
+                      text: 'FEMALE',
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -38,27 +55,6 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  const ReusableCard({
-    Key key,
-    this.color = const Color(0xFF1d1f33),
-  }) : super(key: key);
-
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );

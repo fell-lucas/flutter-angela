@@ -3,33 +3,15 @@ import 'package:bmi_calculator/widgets/icon_content.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
 import 'package:flutter/material.dart';
 
+enum Gender { male, female }
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveBg;
-  Color femaleCardColor = inactiveBg;
-
-  void updateGender(int i) {
-    if (i == 1) {
-      if (maleCardColor == inactiveBg) {
-        maleCardColor = activeBg;
-        femaleCardColor = inactiveBg;
-      } else {
-        maleCardColor = inactiveBg;
-      }
-    }
-    if (i == 2) {
-      if (femaleCardColor == inactiveBg) {
-        femaleCardColor = activeBg;
-        maleCardColor = inactiveBg;
-      } else {
-        femaleCardColor = inactiveBg;
-      }
-    }
-  }
+  Gender selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +33,12 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () => setState(() {
-                        updateGender(1);
+                        selectedGender = Gender.male;
                       }),
                       child: ReusableCard(
-                        color: maleCardColor,
+                        color: selectedGender == Gender.male
+                            ? activeBg
+                            : inactiveBg,
                         child: IconContent(
                           icon: Icons.male,
                           text: 'MALE',
@@ -66,10 +50,12 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () => setState(() {
-                        updateGender(2);
+                        selectedGender = Gender.female;
                       }),
                       child: ReusableCard(
-                        color: femaleCardColor,
+                        color: selectedGender == Gender.female
+                            ? activeBg
+                            : inactiveBg,
                         child: IconContent(
                           icon: Icons.female,
                           text: 'FEMALE',
@@ -81,14 +67,14 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             SizedBox(height: 15),
-            ReusableCard(),
+            Expanded(child: ReusableCard()),
             SizedBox(height: 15),
             Expanded(
               child: Row(
                 children: [
-                  ReusableCard(),
+                  Expanded(child: ReusableCard()),
                   SizedBox(width: 15),
-                  ReusableCard(),
+                  Expanded(child: ReusableCard()),
                 ],
               ),
             ),

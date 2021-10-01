@@ -15,12 +15,12 @@ class IconContent extends StatelessWidget {
         Icon(
           icon,
           size: 80,
-          color: inactiveText,
+          color: kInactiveText,
         ),
         SizedBox(height: 15),
         Text(
           text,
-          style: textStyle,
+          style: kInactiveTextStyle,
         ),
       ],
     );

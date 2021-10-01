@@ -1,6 +1,7 @@
 import 'package:bmi_calculator/theme_globals.dart';
 import 'package:bmi_calculator/widgets/icon_content.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 enum Gender { male, female }
@@ -12,7 +13,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
-
+  int height = 180;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,46 +21,43 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       bottomNavigationBar: Container(
-        height: bottomNavHeight,
-        color: bottomNavColor,
+        height: kBottomNavHeight,
+        color: kRedAccentColor,
       ),
       body: Padding(
         padding: EdgeInsets.all(15),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: GestureDetector(
+                    child: ReusableCard(
                       onTap: () => setState(() {
                         selectedGender = Gender.male;
                       }),
-                      child: ReusableCard(
-                        color: selectedGender == Gender.male
-                            ? activeBg
-                            : inactiveBg,
-                        child: IconContent(
-                          icon: Icons.male,
-                          text: 'MALE',
-                        ),
+                      color: selectedGender == Gender.male
+                          ? kActiveBg
+                          : kInactiveBg,
+                      child: IconContent(
+                        icon: Icons.male,
+                        text: 'MALE',
                       ),
                     ),
                   ),
                   SizedBox(width: 15),
                   Expanded(
-                    child: GestureDetector(
+                    child: ReusableCard(
                       onTap: () => setState(() {
                         selectedGender = Gender.female;
                       }),
-                      child: ReusableCard(
-                        color: selectedGender == Gender.female
-                            ? activeBg
-                            : inactiveBg,
-                        child: IconContent(
-                          icon: Icons.female,
-                          text: 'FEMALE',
-                        ),
+                      color: selectedGender == Gender.female
+                          ? kActiveBg
+                          : kInactiveBg,
+                      child: IconContent(
+                        icon: Icons.female,
+                        text: 'FEMALE',
                       ),
                     ),
                   ),
@@ -67,7 +65,43 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             SizedBox(height: 15),
-            Expanded(child: ReusableCard()),
+            Expanded(
+                child: ReusableCard(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'HEIGHT',
+                    style: kInactiveTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        height.toString(),
+                        style: kBoldTextStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: kInactiveTextStyle,
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    min: 120.0,
+                    max: 220.0,
+                    onChanged: (double val) {
+                      setState(() {
+                        height = val.round();
+                      });
+                    },
+                  )
+                ],
+              ),
+            )),
             SizedBox(height: 15),
             Expanded(
               child: Row(

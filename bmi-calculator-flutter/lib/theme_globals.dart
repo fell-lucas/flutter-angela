@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-const primaryColor = Color(0xFF090c22);
-const bottomNavHeight = 80.0;
-const bottomNavColor = Color(0xFFEB1555);
-const activeBg = Color(0xFF1D1E33);
-const inactiveBg = Color(0xFF111328);
-const inactiveText = Color(0xFF8F9098);
-const textStyle = TextStyle(fontSize: 18, color: inactiveText);
+const kPrimaryColor = Color(0xFF090c22);
+const kBottomNavHeight = 80.0;
+const kRedAccentColor = Color(0xFFEB1555);
+const kRedAccentTransparentColor = Color(0x66EB1555);
+const kActiveBg = Color(0xFF1D1E33);
+const kInactiveBg = Color(0xFF111328);
+const kInactiveText = Color(0xFF8F9098);
+const kInactiveTextStyle = TextStyle(fontSize: 18, color: kInactiveText);
+const kBoldTextStyle = TextStyle(fontSize: 45.0, fontWeight: FontWeight.w900);

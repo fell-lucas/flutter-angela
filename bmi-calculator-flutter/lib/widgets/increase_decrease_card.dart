@@ -35,7 +35,7 @@ class IncreaseDecreaseCard extends StatelessWidget {
             children: [
               Text(
                 number.toString(),
-                style: kBoldTextStyle,
+                style: kBoldNormalTextStyle,
               ),
               Text(
                 abbreviation,

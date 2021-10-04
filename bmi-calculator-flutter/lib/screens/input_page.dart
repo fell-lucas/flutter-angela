@@ -1,6 +1,7 @@
 import 'package:bmi_calculator/theme_globals.dart';
 import 'package:bmi_calculator/widgets/icon_content.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
+import 'package:bmi_calculator/widgets/rounded_icon_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
+  int weight = 60;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +108,58 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: Row(
                 children: [
-                  Expanded(child: ReusableCard()),
+                  Expanded(
+                    child: ReusableCard(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'WEIGHT',
+                            style: kInactiveTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                weight.toString(),
+                                style: kBoldTextStyle,
+                              ),
+                              Text(
+                                'kg',
+                                style: kInactiveTextStyle,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundedIconButton(
+                                icon: Icons.remove,
+                                onPressed: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 15.0,
+                              ),
+                              RoundedIconButton(
+                                icon: Icons.add,
+                                onPressed: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                   SizedBox(width: 15),
                   Expanded(child: ReusableCard()),
                 ],

@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/calculator_brain.dart';
 import 'package:bmi_calculator/theme_globals.dart';
 import 'package:bmi_calculator/widgets/calculate_button.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
@@ -8,6 +9,21 @@ class ResultsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CalculatorBrain cb =
+        ModalRoute.of(context).settings.arguments as CalculatorBrain;
+
+    final String result = cb.getResult().keys.first.toUpperCase();
+    final String bmi = cb.getBmi();
+    final String interpretation = cb.getResult().values.first;
+
+    final TextStyle resultStyle = result == 'OVERWEIGHT'
+        ? kResultOverweightTextStyle
+        : (result == 'NORMAL'
+            ? kResultNormalTextStyle
+            : result == 'UNDERWEIGHT'
+                ? kResultUnderweightStyle
+                : kResultNormalTextStyle);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
@@ -28,7 +44,7 @@ class ResultsPage extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 15),
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  'Your Results',
+                  'Your Result',
                   style: kBoldNormalTextStyle,
                 ),
               ),
@@ -42,15 +58,15 @@ class ResultsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'OVERWEIGHT',
-                        style: kResultTextStyle,
+                        result,
+                        style: resultStyle,
                       ),
                       Text(
-                        '30',
+                        bmi,
                         style: kBoldBigTextStyle,
                       ),
                       Text(
-                        'You have a higher than normal body weight. Try to exercise more.',
+                        interpretation,
                         textAlign: TextAlign.center,
                         style: kResultTipTextStyle,
                       ),

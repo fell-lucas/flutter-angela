@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/calculator_brain.dart';
 import 'package:bmi_calculator/theme_globals.dart';
 import 'package:bmi_calculator/widgets/calculate_button.dart';
 import 'package:bmi_calculator/widgets/icon_content.dart';
@@ -27,7 +28,14 @@ class _InputPageState extends State<InputPage> {
       bottomNavigationBar: CalculateButton(
         text: 'CALCULATE',
         onPressed: () {
-          Navigator.pushNamed(context, '/results');
+          Navigator.pushNamed(
+            context,
+            '/results',
+            arguments: CalculatorBrain(
+              height: height,
+              weight: weight,
+            ),
+          );
         },
       ),
       body: Padding(

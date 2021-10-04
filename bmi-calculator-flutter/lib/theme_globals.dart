@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Color(0xFF090c22);
-const kBottomNavHeight = 80.0;
+const kBottomNavHeight = 70.0;
 const kRedAccentColor = Color(0xFFEB1555);
 const kRedAccentTransparentColor = Color(0x29EB1555);
 const kActiveBg = Color(0xFF1D1E33);

@@ -2,7 +2,6 @@ import 'package:bmi_calculator/theme_globals.dart';
 import 'package:bmi_calculator/widgets/icon_content.dart';
 import 'package:bmi_calculator/widgets/increase_decrease_card.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
-import 'package:bmi_calculator/widgets/rounded_icon_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,9 +23,28 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
       ),
-      bottomNavigationBar: Container(
-        height: kBottomNavHeight,
-        color: kRedAccentColor,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: RawMaterialButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/results');
+          },
+          constraints: BoxConstraints.tightFor(
+            height: kBottomNavHeight,
+            width: double.infinity,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+            ),
+          ),
+          fillColor: kRedAccentColor,
+          child: Text(
+            'CALCULATE',
+            style: TextStyle(fontSize: 32.0),
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(15),

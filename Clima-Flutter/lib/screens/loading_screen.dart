@@ -17,13 +17,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     NetworkHelper nh = NetworkHelper(
       url:
-          'https://api.openweathermap.org/data/2.5/weather?lat=${loc.latitude}&lon=${loc.longitude}&appid=$apiKey',
+          'https://api.openweathermap.org/data/2.5/weather?lat=${loc.latitude}&lon=${loc.longitude}&appid=$apiKey&units=metric',
     );
 
+    var data = await nh.getData();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => LocationScreen(),
+        builder: (context) => LocationScreen(weatherData: data),
       ),
     );
   }

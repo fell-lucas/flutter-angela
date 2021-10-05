@@ -31,3 +31,7 @@ class WeatherModel {
     }
   }
 }
+
+// var temp = decoded["main"]["temp"];
+      // var condition = decoded["weather"][0]["id"];
+      // var name = decoded["name"];

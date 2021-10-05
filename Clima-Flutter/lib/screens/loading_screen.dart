@@ -1,7 +1,5 @@
 import 'package:clima/screens/location_screen.dart';
-import 'package:clima/services/location.dart';
-import 'package:clima/services/networking.dart';
-import 'package:clima/utilities/constants.dart';
+import 'package:clima/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -11,22 +9,23 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  bool hasError = false;
+
   void getLocation() async {
-    Location loc = Location();
-    await loc.getCurrentLocation();
-
-    NetworkHelper nh = NetworkHelper(
-      url:
-          'https://api.openweathermap.org/data/2.5/weather?lat=${loc.latitude}&lon=${loc.longitude}&appid=$apiKey&units=metric',
-    );
-
-    var data = await nh.getData();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => LocationScreen(weatherData: data),
-      ),
-    );
+    WeatherModel wm = WeatherModel();
+    var data = await wm.getLocationWeather();
+    if (data != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LocationScreen(weatherData: data),
+        ),
+      );
+    } else {
+      setState(() {
+        hasError = true;
+      });
+    }
   }
 
   @override
@@ -38,10 +37,25 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SpinKitDoubleBounce(
-        color: Colors.white,
-        size: 100.0,
-      ),
+      body: hasError
+          ? SpinKitDoubleBounce(
+              color: Colors.white,
+              size: 100.0,
+            )
+          : SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Something went wrong. Check if location services are enabled or try again later.',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
     );
   }
 }

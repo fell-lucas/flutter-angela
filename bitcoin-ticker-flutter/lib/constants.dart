@@ -1,2 +1,2 @@
-const apiKey = '91141D20-4F4E-4B21-9A6E-FE31A4EABC4D';
+const apiKey = 'F25E7444-A599-4056-9D35-6259DD6182CC';
 const baseURL = 'https://rest.coinapi.io/v1/exchangerate';

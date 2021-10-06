@@ -3,6 +3,13 @@ import 'package:clima/services/networking.dart';
 import 'package:clima/utilities/constants.dart';
 
 class WeatherModel {
+  Future<dynamic> getCityWeather({String city}) async {
+    NetworkHelper nh = NetworkHelper(
+      url: '$baseURL?q=$city&appid=$apiKey&units=metric',
+    );
+    return nh.getData();
+  }
+
   Future<dynamic> getLocationWeather() async {
     Location loc = Location();
     await loc.getCurrentLocation();

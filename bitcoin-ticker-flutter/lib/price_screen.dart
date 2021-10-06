@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bitcoin_ticker/coin_data.dart';
+import 'package:bitcoin_ticker/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -10,7 +13,24 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  int btcUsd = 0;
   String selectedItem = 'USD';
+
+  void getExchangeRates() async {
+    Response response = await get('$baseURL/BTC/USD?apikey=$apiKey');
+    if (response.statusCode == 200) {
+      setState(() {
+        double rate = jsonDecode(response.body)['rate'];
+        btcUsd = rate.toInt();
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getExchangeRates();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +53,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = ? USD',
+                  '1 BTC = $btcUsd USD',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,

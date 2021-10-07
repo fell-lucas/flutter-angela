@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1043579135685",
+    "project_id": "flash-chat-cfc0c",
+    "storage_bucket": "flash-chat-cfc0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043579135685:android:dc3bf74ab9a594586532ac",
+        "android_client_info": {
+          "package_name": "co.lucasfell.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043579135685-rrgko8a8r4id4ta91c8tagc0mcfg3b6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4js0pJ50eJetyDzDZK2vZBKp0WWCnDkc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043579135685-rrgko8a8r4id4ta91c8tagc0mcfg3b6c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

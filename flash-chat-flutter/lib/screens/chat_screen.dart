@@ -15,15 +15,12 @@ class _ChatScreenState extends State<ChatScreen> {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   String messageText;
-  List<DocumentChange<Map<String, dynamic>>> messages;
 
   void getCurrentUser() {
     if (_auth.currentUser != null) {
       print(_auth.currentUser.email);
     }
   }
-
-  List<Widget> messagesWidget = [];
 
   @override
   void initState() {
@@ -53,16 +50,20 @@ class _ChatScreenState extends State<ChatScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             StreamBuilder<QuerySnapshot>(
-              stream: _firestore.collection('messages').snapshots(),
+              stream: _firestore
+                  .collection('messages')
+                  .orderBy('createdAt')
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
                 }
-                snapshot.data.docChanges.forEach((element) {
-                  final text = element.doc.get('text');
-                  final sender = element.doc.get('sender');
+                List<Widget> messagesWidget = [];
+                snapshot.data.docs.forEach((element) {
+                  final text = element.get('text');
+                  final sender = element.get('sender');
                   messagesWidget.add(Text('$text from $sender'));
                 });
                 return Column(
@@ -88,6 +89,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': _auth.currentUser.email,
+                        'createdAt': DateTime.now().millisecondsSinceEpoch
                       });
                     },
                     child: Text(

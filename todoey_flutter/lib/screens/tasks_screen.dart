@@ -8,7 +8,70 @@ class TasksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            context: context,
+            builder: (context) => Container(
+              color: MediaQuery.of(context).viewInsets.bottom == 0.0
+                  ? const Color(0xFF757575)
+                  : const Color(0xFF1C5A75),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: CustomContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      child: Column(
+                        children: [
+                          const Text(
+                            'Add Task',
+                            style: TextStyle(
+                              color: Colors.lightBlueAccent,
+                              fontSize: 32.0,
+                            ),
+                          ),
+                          const TextField(
+                            autofocus: true,
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  width: 4.0,
+                                  color: Colors.lightBlueAccent,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          MaterialButton(
+                            onPressed: () {},
+                            color: Colors.lightBlueAccent,
+                            minWidth: double.infinity,
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 15.0),
+                              child: Text(
+                                'Add',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
@@ -51,28 +114,41 @@ class TasksScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: ListView(
-                    children: const [
-                      CheckboxItem(),
-                      CheckboxItem(),
-                      CheckboxItem(),
-                    ],
-                  ),
+              child: CustomContainer(
+                child: ListView(
+                  children: const [
+                    CheckboxItem(),
+                    CheckboxItem(),
+                    CheckboxItem(),
+                  ],
                 ),
               ),
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CustomContainer extends StatelessWidget {
+  const CustomContainer({Key? key, required this.child}) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: child,
       ),
     );
   }

@@ -38,7 +38,7 @@ class _ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             StreamBuilder<QuerySnapshot>(
               stream: _firestore
@@ -52,16 +52,19 @@ class _ChatScreenState extends State<ChatScreen> {
                   );
                 }
                 List<MessageBubble> messagesWidget = [];
-                snapshot.data.docs.forEach((element) {
+                snapshot.data.docs.reversed.forEach((element) {
+                  final String email = element.get('sender');
                   messagesWidget.add(
                     MessageBubble(
                       text: element.get('text'),
-                      sender: element.get('sender'),
+                      sender: email,
+                      sentByLoggedUser: email == _auth.currentUser.email,
                     ),
                   );
                 });
                 return Expanded(
                   child: ListView(
+                    reverse: true,
                     children: messagesWidget,
                   ),
                 );

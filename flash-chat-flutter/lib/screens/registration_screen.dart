@@ -82,7 +82,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       password: password,
                     );
                     setState(() {
-                      isLoading = true;
+                      isLoading = false;
                     });
                     if (newUser != null) {
                       Navigator.pushNamed(context, ChatScreen.route);

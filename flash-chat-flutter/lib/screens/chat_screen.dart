@@ -15,11 +15,26 @@ class _ChatScreenState extends State<ChatScreen> {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   String messageText;
+  List<DocumentChange<Map<String, dynamic>>> messages;
 
   void getCurrentUser() {
     if (_auth.currentUser != null) {
       print(_auth.currentUser.email);
     }
+  }
+
+  void getMessages() async {
+    await for (var snapshot in _firestore.collection('messages').snapshots()) {
+      snapshot.docChanges.forEach((element) {
+        print(element.doc.data());
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getMessages();
   }
 
   @override

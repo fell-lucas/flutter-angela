@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/widgets/message_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 
@@ -11,21 +12,11 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  final TextEditingController textController = TextEditingController();
   String messageText;
-
-  void getCurrentUser() {
-    if (_auth.currentUser != null) {
-      print(_auth.currentUser.email);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +51,19 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                List<Widget> messagesWidget = [];
+                List<MessageBubble> messagesWidget = [];
                 snapshot.data.docs.forEach((element) {
-                  final text = element.get('text');
-                  final sender = element.get('sender');
-                  messagesWidget.add(Text('$text from $sender'));
+                  messagesWidget.add(
+                    MessageBubble(
+                      text: element.get('text'),
+                      sender: element.get('sender'),
+                    ),
+                  );
                 });
-                return Column(
-                  children: messagesWidget,
+                return Expanded(
+                  child: ListView(
+                    children: messagesWidget,
+                  ),
                 );
               },
             ),
@@ -78,6 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      controller: textController,
                       onChanged: (value) {
                         messageText = value;
                       },
@@ -86,11 +83,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   FlatButton(
                     onPressed: () {
-                      _firestore.collection('messages').add({
-                        'text': messageText,
-                        'sender': _auth.currentUser.email,
-                        'createdAt': DateTime.now().millisecondsSinceEpoch
-                      });
+                      if (messageText != null)
+                        _firestore.collection('messages').add({
+                          'text': messageText,
+                          'sender': _auth.currentUser.email,
+                          'createdAt': DateTime.now().millisecondsSinceEpoch
+                        });
+                      textController.clear();
+                      messageText = null;
                     },
                     child: Text(
                       'Send',

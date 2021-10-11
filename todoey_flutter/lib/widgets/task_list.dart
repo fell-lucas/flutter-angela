@@ -24,26 +24,29 @@ class _TaskListState extends State<TaskList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return CheckboxListTile(
-          value: tasks![index].isChecked,
-          onChanged: (newValue) {
-            setState(() {
-              tasks![index].toggleDone();
-            });
-          },
-          activeColor: Colors.lightBlueAccent,
-          title: Text(
-            tasks![index].text,
-            style: TextStyle(
-              decoration:
-                  tasks![index].isChecked ? TextDecoration.lineThrough : null,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 56.0),
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return CheckboxListTile(
+            value: tasks![index].isChecked,
+            onChanged: (newValue) {
+              setState(() {
+                tasks![index].toggleDone();
+              });
+            },
+            activeColor: Colors.lightBlueAccent,
+            title: Text(
+              tasks![index].text,
+              style: TextStyle(
+                decoration:
+                    tasks![index].isChecked ? TextDecoration.lineThrough : null,
+              ),
             ),
-          ),
-        );
-      },
-      itemCount: tasks!.length,
+          );
+        },
+        itemCount: tasks!.length,
+      ),
     );
   }
 }

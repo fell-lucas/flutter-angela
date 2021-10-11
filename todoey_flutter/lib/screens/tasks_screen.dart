@@ -49,14 +49,6 @@ class _TasksScreenState extends State<TasksScreen> {
                             autofocus: true,
                             controller: textController,
                             textAlign: TextAlign.center,
-                            decoration: const InputDecoration(
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 4.0,
-                                  color: Colors.lightBlueAccent,
-                                ),
-                              ),
-                            ),
                             onChanged: (val) {
                               newTaskTitle = val;
                             },

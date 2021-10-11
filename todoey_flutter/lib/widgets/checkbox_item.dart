@@ -1,20 +1,34 @@
 import 'package:flutter/material.dart';
 
-class CheckboxItem extends StatelessWidget {
+class CheckboxItem extends StatefulWidget {
   const CheckboxItem({
     Key? key,
+    required this.text,
   }) : super(key: key);
+
+  final String text;
+
+  @override
+  State<CheckboxItem> createState() => _CheckboxItemState();
+}
+
+class _CheckboxItemState extends State<CheckboxItem> {
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-      value: true,
-      onChanged: (value) {},
+      value: isChecked,
+      onChanged: (value) {
+        setState(() {
+          isChecked = value!;
+        });
+      },
       activeColor: Colors.lightBlueAccent,
-      title: const Text(
-        'Buy bread',
+      title: Text(
+        widget.text,
         style: TextStyle(
-          decoration: TextDecoration.lineThrough,
+          decoration: isChecked ? TextDecoration.lineThrough : null,
         ),
       ),
     );

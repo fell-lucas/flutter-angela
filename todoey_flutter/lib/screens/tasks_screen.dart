@@ -117,9 +117,15 @@ class TasksScreen extends StatelessWidget {
               child: CustomContainer(
                 child: ListView(
                   children: const [
-                    CheckboxItem(),
-                    CheckboxItem(),
-                    CheckboxItem(),
+                    CheckboxItem(
+                      text: 'Buy bread',
+                    ),
+                    CheckboxItem(
+                      text: 'Buy bread',
+                    ),
+                    CheckboxItem(
+                      text: 'Buy bread',
+                    ),
                   ],
                 ),
               ),

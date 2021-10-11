@@ -13,6 +13,8 @@ class TasksScreen extends StatefulWidget {
 
 class _TasksScreenState extends State<TasksScreen> {
   List<Task> tasks = [];
+  TextEditingController textController = TextEditingController();
+  late String newTaskTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +45,11 @@ class _TasksScreenState extends State<TasksScreen> {
                               fontSize: 32.0,
                             ),
                           ),
-                          const TextField(
+                          TextField(
                             autofocus: true,
+                            controller: textController,
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 4.0,
@@ -54,12 +57,21 @@ class _TasksScreenState extends State<TasksScreen> {
                                 ),
                               ),
                             ),
+                            onChanged: (val) {
+                              newTaskTitle = val;
+                            },
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              textController.clear();
+                              setState(() {
+                                tasks.add(Task(text: newTaskTitle));
+                              });
+                              Navigator.pop(context);
+                            },
                             color: Colors.lightBlueAccent,
                             minWidth: double.infinity,
                             child: const Padding(
@@ -123,10 +135,10 @@ class _TasksScreenState extends State<TasksScreen> {
                 ],
               ),
             ),
-            const Expanded(
+            Expanded(
               child: CustomContainer(
                 child: TaskList(
-                  tasks: [],
+                  tasks: tasks,
                 ),
               ),
             )

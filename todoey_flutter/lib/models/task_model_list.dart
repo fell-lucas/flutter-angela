@@ -21,4 +21,9 @@ class TaskModelList extends ChangeNotifier {
     _tasks[index].toggleDone();
     notifyListeners();
   }
+
+  void remove(int index) {
+    _tasks.removeAt(index);
+    notifyListeners();
+  }
 }

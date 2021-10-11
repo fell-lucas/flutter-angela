@@ -15,18 +15,27 @@ class TaskList extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 56.0),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          return CheckboxListTile(
-            value: tasks[index].isChecked,
-            onChanged: (newValue) {
-              Provider.of<TaskModelList>(context, listen: false)
-                  .toggleTask(index);
-            },
-            activeColor: Colors.lightBlueAccent,
-            title: Text(
-              tasks[index].text,
-              style: TextStyle(
-                decoration:
-                    tasks[index].isChecked ? TextDecoration.lineThrough : null,
+          return Material(
+            child: GestureDetector(
+              onLongPress: () {
+                Provider.of<TaskModelList>(context, listen: false)
+                    .remove(index);
+              },
+              child: CheckboxListTile(
+                value: tasks[index].isChecked,
+                onChanged: (newValue) {
+                  Provider.of<TaskModelList>(context, listen: false)
+                      .toggleTask(index);
+                },
+                activeColor: Colors.lightBlueAccent,
+                title: Text(
+                  tasks[index].text,
+                  style: TextStyle(
+                    decoration: tasks[index].isChecked
+                        ? TextDecoration.lineThrough
+                        : null,
+                  ),
+                ),
               ),
             ),
           );

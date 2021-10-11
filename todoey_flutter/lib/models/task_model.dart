@@ -1,4 +1,6 @@
-class Task {
+import 'package:flutter/cupertino.dart';
+
+class Task extends ChangeNotifier {
   final String text;
   bool isChecked;
   Task({

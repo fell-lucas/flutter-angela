@@ -1,51 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey_flutter/models/task_model.dart';
+import 'package:todoey_flutter/models/task_model_list.dart';
 
-class TaskList extends StatefulWidget {
+class TaskList extends StatelessWidget {
   const TaskList({
     Key? key,
-    required this.tasks,
   }) : super(key: key);
-
-  final List<Task>? tasks;
-
-  @override
-  State<TaskList> createState() => _TaskListState();
-}
-
-class _TaskListState extends State<TaskList> {
-  List<Task>? tasks;
-
-  @override
-  void initState() {
-    super.initState();
-    tasks = widget.tasks;
-  }
 
   @override
   Widget build(BuildContext context) {
+    final List<Task> tasks = Provider.of<TaskModelList>(context).getTasks();
     return Padding(
       padding: const EdgeInsets.only(bottom: 56.0),
       child: ListView.builder(
         itemBuilder: (context, index) {
           return CheckboxListTile(
-            value: tasks![index].isChecked,
+            value: tasks[index].isChecked,
             onChanged: (newValue) {
-              setState(() {
-                tasks![index].toggleDone();
-              });
+              Provider.of<TaskModelList>(context, listen: false)
+                  .toggleTask(index);
             },
             activeColor: Colors.lightBlueAccent,
             title: Text(
-              tasks![index].text,
+              tasks[index].text,
               style: TextStyle(
                 decoration:
-                    tasks![index].isChecked ? TextDecoration.lineThrough : null,
+                    tasks[index].isChecked ? TextDecoration.lineThrough : null,
               ),
             ),
           );
         },
-        itemCount: tasks!.length,
+        itemCount: tasks.length,
       ),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey_flutter/models/task_model.dart';
+import 'package:todoey_flutter/models/task_model_list.dart';
 import 'package:todoey_flutter/widgets/custom_container.dart';
 
 import 'package:todoey_flutter/widgets/task_list.dart';
@@ -12,9 +14,8 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [];
   TextEditingController textController = TextEditingController();
-  late String newTaskTitle;
+  late String newTaskTitle = '';
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +60,10 @@ class _TasksScreenState extends State<TasksScreen> {
                           MaterialButton(
                             onPressed: () {
                               textController.clear();
-                              setState(() {
-                                tasks.add(Task(text: newTaskTitle));
-                              });
+                              Provider.of<TaskModelList>(context, listen: false)
+                                  .addTodo(
+                                Task(text: newTaskTitle),
+                              );
                               Navigator.pop(context);
                             },
                             color: Colors.lightBlueAccent,
@@ -101,8 +103,8 @@ class _TasksScreenState extends State<TasksScreen> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 30.0,
                     child: Icon(
@@ -111,8 +113,8 @@ class _TasksScreenState extends State<TasksScreen> {
                       size: 30.0,
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     'Todoey',
                     style: TextStyle(
                       color: Colors.white,
@@ -121,17 +123,15 @@ class _TasksScreenState extends State<TasksScreen> {
                     ),
                   ),
                   Text(
-                    '12 tasks',
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                    '${Provider.of<TaskModelList>(context).getLength()} tasks',
+                    style: const TextStyle(color: Colors.white, fontSize: 20.0),
                   )
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: CustomContainer(
-                child: TaskList(
-                  tasks: tasks,
-                ),
+                child: TaskList(),
               ),
             )
           ],

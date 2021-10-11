@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:todoey_flutter/widgets/checkbox_item.dart';
+import 'package:todoey_flutter/models/task_model.dart';
+import 'package:todoey_flutter/widgets/custom_container.dart';
 
-class TasksScreen extends StatelessWidget {
+import 'package:todoey_flutter/widgets/task_list.dart';
+
+class TasksScreen extends StatefulWidget {
   const TasksScreen({Key? key}) : super(key: key);
+
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [];
 
   @override
   Widget build(BuildContext context) {
@@ -113,48 +123,15 @@ class TasksScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: CustomContainer(
-                child: ListView(
-                  children: const [
-                    CheckboxItem(
-                      text: 'Buy bread',
-                    ),
-                    CheckboxItem(
-                      text: 'Buy bread',
-                    ),
-                    CheckboxItem(
-                      text: 'Buy bread',
-                    ),
-                  ],
+                child: TaskList(
+                  tasks: [],
                 ),
               ),
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CustomContainer extends StatelessWidget {
-  const CustomContainer({Key? key, required this.child}) : super(key: key);
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: child,
       ),
     );
   }
